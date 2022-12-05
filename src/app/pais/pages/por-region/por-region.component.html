@@ -1,0 +1,33 @@
+<h3>Buscar por región <small> {{regionActiva | titlecase  }} </small></h3>
+
+
+<hr>
+
+<h5> Elija el continente: </h5>
+
+<div class="row">
+    <div class="col">
+    
+        <!-- [class] entre corchetes indica que va a evaluar una condición de ts o propiedad -->
+        <button *ngFor="let region of regiones"
+            [class]="getClaseCss(region)"
+            (click)="buscarPaises(region)"
+        > {{region | titlecase}} </button>
+    </div>
+</div>
+
+<hr>
+
+<!-- div alerta no se encuentra -->
+<div *ngIf="hayError" class="alert alert-danger">
+    No se encontró nada con el término {{regionActiva}}
+</div>
+
+<!-- div tabla resultados -->
+<div *ngIf="!hayError" class="row">
+    <div class="col">
+        <app-pais-tabla
+            [paises] = "paises"
+        ></app-pais-tabla>
+    </div>
+</div>
